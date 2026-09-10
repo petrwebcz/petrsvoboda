@@ -5,7 +5,9 @@ Repository to demonstrate my code abilities.
  
 2)  Processing of Suspicious Transactions
  This application demonstrates
+
 a) Knowladge about architecture of scalable processing. Kafka si replaced by custom paritionier where is load is distributed among partition in balanced way.
+
 b) Knowladge java structures like TreeSet.
  
  A producer sends data to a partitioned queue.
