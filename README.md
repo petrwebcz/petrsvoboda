@@ -1,8 +1,7 @@
- Processing of Suspicious Transactions
- This application demonstrates the use of scalable processing.
- A producer sends data to a partitioned queue.
- The producer ensures that users with the same userId are assigned to the same partition.
- The partition number is calculated as: key.hashCode() % partitionCount
+ This repository is created for demonstrating purposes.
+ Currently you can find there solution of several algorithms on Leetcode. 
+ 
+1) Find_shortest_path_in_binary_matrix - Breadth First Search. The goal is to find the shortest way from the point A to point B in 2D matrix. :-) 
+2) sliding_window_find_longest_substring_with_unique_characters - Sliding window. The goal is to find longest substring with unique characters. :-)
 
-EventStore is implemented as an in-memory event-sourced database backed by a sorted set (TreeSet).
 
