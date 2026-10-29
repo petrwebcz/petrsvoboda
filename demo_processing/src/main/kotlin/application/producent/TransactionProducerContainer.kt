@@ -1,18 +1,15 @@
 package org.example.application.producent
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import org.example.domain.TransactionEvent
+import org.example.domain.Transaction
 import org.example.infrastructure.kafka.PartitionSelector
 import org.example.infrastructure.kafka.PartitionedQueue
 import kotlin.coroutines.cancellation.CancellationException
 
 class TransactionProducerContainer(
-    private var partitionQueue: PartitionedQueue<TransactionEvent>,
+    private var partitionQueue: PartitionedQueue<Transaction>,
     private val partitionSelector: PartitionSelector,
     private val coroutineScope: CoroutineScope,
 ) {

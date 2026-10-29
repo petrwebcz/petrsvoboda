@@ -4,8 +4,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.example.application.factories.TransactionConsumerFactory
-import org.example.domain.TransactionEvent
-import org.example.infrastructure.kafka.PartitionedQueue
 import kotlin.coroutines.cancellation.CancellationException
 
 class ConsumersOrchestrator (

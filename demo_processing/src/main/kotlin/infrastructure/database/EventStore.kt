@@ -1,21 +1,20 @@
 package org.example.infrastructure.database
 
-import org.example.domain.TransactionEvent
-import java.util.Collections
+import org.example.domain.Transaction
 import java.util.SortedSet
 import java.util.TreeSet
 import java.util.concurrent.ConcurrentHashMap
 
 class EventStore {
-    private val eventStore: ConcurrentHashMap<String, TreeSet<TransactionEvent>> = ConcurrentHashMap()
+    private val eventStore: ConcurrentHashMap<String, TreeSet<Transaction>> = ConcurrentHashMap()
 
-    fun addEvent(event: TransactionEvent) {
-        val events = eventStore.computeIfAbsent(event.userId) {sortedSetOf<TransactionEvent>()}
+    fun addEvent(event: Transaction) {
+        val events = eventStore.computeIfAbsent(event.userId) {sortedSetOf<Transaction>()}
         events.add(event)
     }
 
-    fun getEvents(userId: String, timestamp: Long): SortedSet<TransactionEvent> {
-        val events = eventStore.computeIfAbsent(userId) { sortedSetOf<TransactionEvent>() }
+    fun getEvents(userId: String, timestamp: Long): SortedSet<Transaction> {
+        val events = eventStore.computeIfAbsent(userId) { sortedSetOf<Transaction>() }
         val iterator = events.descendingIterator()
 
         while (iterator.hasNext()) {

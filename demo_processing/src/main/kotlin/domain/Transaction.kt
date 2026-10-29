@@ -1,6 +1,6 @@
 package org.example.domain
 
-data class TransactionEvent(
+data class Transaction(
     val eventId: String,
     val timestamp: Long,
     val userId: String,
@@ -9,9 +9,16 @@ data class TransactionEvent(
     val location: String,
     val type: String,
     val transactionStatus: TransactionStatus
-) : Comparable<TransactionEvent> {
-    override fun compareTo(other: TransactionEvent): Int {
+) : Comparable<Transaction> {
+    override fun compareTo(other: Transaction): Int {
         return timestamp.compareTo(other.timestamp)
+    }
+    fun decline() : Transaction {
+        return this.copy(transactionStatus = TransactionStatus.DECLINED)
+    }
+
+    fun approve() : Transaction {
+        return this.copy(transactionStatus = TransactionStatus.ACCEPTED)
     }
 }
 

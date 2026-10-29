@@ -9,9 +9,8 @@ import org.example.application.factories.DetectSuspiciousTransactionUseCaseFacto
 import org.example.application.factories.TransactionConsumerFactory
 import org.example.application.producent.TransactionProducerContainer
 import org.example.consumers.ConsumersOrchestrator
-import org.example.domain.TransactionEvent
+import org.example.domain.Transaction
 import org.example.infrastructure.database.EventStore
-import org.example.infrastructure.database.EventStoreMonitoring
 import org.example.infrastructure.kafka.PartitionSelector
 import org.example.infrastructure.kafka.PartitionedQueue
 
@@ -24,7 +23,7 @@ fun main() {
   runBlocking {
       val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
       val partitionSelector = PartitionSelector()
-      val partitionedQueue = PartitionedQueue<TransactionEvent>();
+      val partitionedQueue = PartitionedQueue<Transaction>();
       val eventStore = EventStore();
 
       val detectSuspiciousTransactionUseCaseFactory = DetectSuspiciousTransactionUseCaseFactory(eventStore)

@@ -1,6 +1,6 @@
 package org.example.application.usecase
 
-import org.example.domain.TransactionEvent
+import org.example.domain.Transaction
 import org.example.domain.TransactionStatus
 import org.example.infrastructure.database.EventStore
 import java.time.Duration
@@ -12,7 +12,7 @@ const val MAXIMUM_TRANSACTIONS_INTERVAL_MINUTES = 1L
 class DetectSuspiciousTransactionUseCase(
     private val eventStore: EventStore) {
 
-    fun processTransaction(transaction: TransactionEvent) {
+    fun processTransaction(transaction: Transaction) {
         val lastTransactions = eventStore.getEvents(
             transaction.userId,
             Instant.ofEpochMilli(transaction.timestamp)
@@ -21,10 +21,9 @@ class DetectSuspiciousTransactionUseCase(
         )
         if (lastTransactions.count() > MAXIMUM_TRANSACTIONS_IN_INTERVAL) {
             println("Transaction blocked, transaction count: ${lastTransactions.count()}, user id: ${transaction.userId}")
-            eventStore.addEvent(transaction.copy(transactionStatus = TransactionStatus.DECLINED))
+            eventStore.addEvent(transaction.decline())
         }
-
         println("Transaction accepted, transaction count: ${lastTransactions.count()}, user id: ${transaction.userId}")
-        eventStore.addEvent(transaction.copy(transactionStatus = TransactionStatus.ACCEPTED))
+        eventStore.addEvent(transaction.approve())
     }
 }

@@ -2,7 +2,7 @@ package org.example.application.producent
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import org.example.domain.TransactionEvent
+import org.example.domain.Transaction
 import org.example.domain.TransactionStatus
 import org.example.infrastructure.kafka.PartitionSelector
 import org.example.infrastructure.kafka.PartitionedQueue
@@ -11,7 +11,7 @@ import java.util.UUID
 import kotlin.coroutines.coroutineContext
 
 class TransactionProducer(
-    private val partitionedQueue: PartitionedQueue<TransactionEvent>,
+    private val partitionedQueue: PartitionedQueue<Transaction>,
     private val partitionSelector: PartitionSelector
 ) {
     suspend fun produce() {
@@ -19,7 +19,7 @@ class TransactionProducer(
             val userId = (1..20).random().toString()
             val partition = partitionSelector.getPartition(userId, 10)
             partitionedQueue.add(
-                partition, TransactionEvent(
+                partition, Transaction(
                     eventId = UUID.randomUUID().toString(),
                     timestamp = Instant.now().toEpochMilli(),
                     userId = userId,
