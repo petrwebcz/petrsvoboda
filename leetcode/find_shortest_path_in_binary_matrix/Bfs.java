@@ -21,21 +21,21 @@ public class Bfs {
 
             while (!queue.isEmpty()) {
                 var current = queue.poll();
-                System.out.println("Hit the position: Row: "+ current.row + " Col:" + current.col);
-                if (current.row == destinationRow && current.col == destinationColumn) {
-                    return current.depth;
+                System.out.println("Hit the position: Row: "+ current.getRow() + " Col:" + current.getCol());
+                if (current.getRow() == destinationRow && current.getCol() == destinationColumn) {
+                    return current.getDepth();
                 }
                 if (visited.contains(current)) {
                     System.out.println("Its visited"+current.toString());
                     continue;
                 }
-                if (!(current.row >= 0 && current.row <= rows-1 && current.col >= 0 && current.col <= cols-1)) {
+                if (!(current.getRow() >= 0 && current.getRow() <= rows-1 && current.getCol() >= 0 && current.getCol() <= cols-1)) {
                     System.out.println("Its outside of matrix");
                     continue;
                 }
-                if(grid[current.row][current.col] == 1) {
+                if(grid[current.getRow()][current.getCol()] == 1) {
                     System.out.println("Its blocked"+current.toString());
-                    System.out.println("Hit the position: Row: "+ current.row + " Col:" + current.col);
+                    System.out.println("Hit the position: Row: "+ current.getRow() + " Col:" + current.getCol());
                     continue;
                 }
                 visited.add(current);
