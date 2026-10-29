@@ -7,11 +7,22 @@ public class Coordination {
         this.depth = depth;
     }
 
-    public int row;
-    public int col;
-    public int depth;
+    private int row;
+    private int col;
+    private int depth;
 
+    public int getRow() {
+        return row;
+    }
 
+    public int getCol() {
+        return col;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+    
     public Coordination moveDown() {
         return new Coordination(row + 1, col, depth + 1);
     }
@@ -24,9 +35,6 @@ public class Coordination {
         return new Coordination(row+1, col + 1, depth + 1);
     }
 
-
-    //TODO: Equals
-
     @Override
     public boolean equals(Object o) {
         if (o instanceof Coordination other) {
@@ -37,7 +45,7 @@ public class Coordination {
 
     @Override
     public int hashCode() {
-        return 31 * row + col;
+        return Objects.hash(row, col);
     }
 
     @Override
