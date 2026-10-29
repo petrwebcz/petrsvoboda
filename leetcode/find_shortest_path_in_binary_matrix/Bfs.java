@@ -3,9 +3,10 @@ package org.example;
 import java.util.*;
 
 public class Bfs {
+    public int CELL_BLOCKED = 1;
     public int shortestPathBinaryMatrix(
         int[][] grid) {
-            if(grid.length == 0 || grid[0][0] == 1) {
+            if(grid.length == 0 || grid[0][0] == CELL_BLOCKED) {
                 return -1;
             }
 
@@ -33,7 +34,7 @@ public class Bfs {
                     System.out.println("Its outside of matrix");
                     continue;
                 }
-                if(grid[current.getRow()][current.getCol()] == 1) {
+                if(grid[current.getRow()][current.getCol()] == CELL_BLOCKED) {
                     System.out.println("Its blocked"+current.toString());
                     System.out.println("Hit the position: Row: "+ current.getRow() + " Col:" + current.getCol());
                     continue;
