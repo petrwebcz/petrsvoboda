@@ -25,6 +25,8 @@ public class Coordination {
     }
 
 
+    //TODO: Equals
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof Coordination other) {
